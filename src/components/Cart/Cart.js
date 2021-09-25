@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Cart = (props) => {
-  let total = props.cart.reduce((prev, product) => prev + product.price, 0);
-  let shippingPrice = props.cart.reduce(
-    (prev, product) => prev + product.shipping,
-    0
-  );
-  let tax = total * 0.1;
-  let grandTotal = total + shippingPrice + tax;
+  // some essentital property
+  let items = 0;
+  let itemTotal = 0;
+  let itemShipping = 0;
+
+  // looping props.cart items
+  for (let product of props.cart) {
+    items += product.quantity;
+    itemTotal += product.price * product.quantity;
+    itemShipping += product.shipping;
+  }
+
+  let itemTax = itemTotal * 0.2;
+  let itemGrandTotal = itemTotal + itemShipping + itemTax;
 
   return (
     <div className="cart p-3">
       <h5 className="text-center mb-4"> Order Summary </h5>
-      <p className="mb-3"> Items Ordered : {props.cart.length}</p>
-      <p className="mb-3"> Price : {total === 0 ? 0 : total.toFixed(2)}</p>
+      <p className="mb-3"> Items Ordered : {items}</p>
+      <p className="mb-3"> Price : {itemTotal && itemTotal.toFixed(2)}</p>
       <p className="mb-3">
-        {" "}
-        Shipping : {shippingPrice === 0 ? 0 : shippingPrice.toFixed(2)}
+        Shipping : {itemShipping && itemShipping.toFixed(2)}
       </p>
-      <p className="mb-3"> Tax : {tax === 0 ? 0 : tax.toFixed(2)}</p>
+      <p className="mb-3"> Tax : {itemTax && itemTax.toFixed(2)}</p>
       <p className="mb-3">
-        {" "}
-        Grand Total : {grandTotal === 0 ? 0 : grandTotal.toFixed(2)}
+        Grand Total : {itemGrandTotal && itemGrandTotal.toFixed(2)}
       </p>
       <a href="/buy" className="btn btn-warning d-block">
         Buy Now
