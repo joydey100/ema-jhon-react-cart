@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
 import logo from "../../images/logo.png";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -10,21 +11,21 @@ const Header = () => {
       {/* Menu */}
       <nav className="bg-dark mt-3">
         <div className="container d-flex">
-          <a href="/shop" className="nav-items p-3 d-block nav-link text-white">
+          <NavLink to="/" className="nav-items p-3 d-block nav-link text-white">
             Shop
-          </a>
-          <a
-            href="/review"
+          </NavLink>
+          <NavLink
+            to="/review"
             className="nav-items p-3 d-block nav-link text-white"
           >
             Order Review
-          </a>
-          <a
-            href="/inventory"
+          </NavLink>
+          <NavLink
+            to="/inventory"
             className="nav-items p-3 d-block nav-link text-white"
           >
             Manage Inventory Here
-          </a>
+          </NavLink>
         </div>
       </nav>
     </div>
