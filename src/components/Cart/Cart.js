@@ -28,9 +28,7 @@ const Cart = (props) => {
       <p className="mb-3">
         Grand Total : {itemGrandTotal && itemGrandTotal.toFixed(2)}
       </p>
-      <a href="/buy" className="btn btn-warning d-block">
-        Buy Now
-      </a>
+      {props.children}
     </div>
   );
 };

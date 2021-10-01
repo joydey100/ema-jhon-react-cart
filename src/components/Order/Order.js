@@ -1,9 +1,10 @@
 import React from "react";
 import useCart from "../../hooks/useCart";
 import useProducts from "../../hooks/useProducts";
-import { removeFromDb } from "../../utilities/fakedb";
+import { clearTheCart, removeFromDb } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import { NavLink } from "react-router-dom";
 
 const Order = () => {
   const [products] = useProducts();
@@ -13,6 +14,11 @@ const Order = () => {
     let filterProduct = cart.filter((pd) => pd.key !== product.key);
     setCart(filterProduct);
     removeFromDb(product.key);
+  };
+
+  const removeorders = () => {
+    setCart([]);
+    clearTheCart();
   };
 
   return (
@@ -28,7 +34,15 @@ const Order = () => {
           ))}
         </div>
         <div className="col-md-3">
-          <Cart cart={cart} />
+          <Cart cart={cart}>
+            <NavLink
+              to="/success"
+              className="btn btn-warning"
+              onClick={removeorders}
+            >
+              Place Order
+            </NavLink>
+          </Cart>
         </div>
       </div>
     </div>
